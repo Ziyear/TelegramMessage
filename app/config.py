@@ -26,7 +26,7 @@ pool = PooledDB(
     blocking=True,
     port=3306,
     user='root',
-    password=os.getenv("MYSQL_ROOT_PASSWORD"),
+    password=os.getenv("MYSQL_ROOT_PASSWORD", "123456"),
     database='tg_message'
 )
 
