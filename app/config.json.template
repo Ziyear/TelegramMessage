@@ -1,0 +1,19 @@
+{
+  "api_id": "",
+  "api_hash": "",
+  "group_ids": [
+  ],
+  "keywords": [
+    "telegram"
+  ],
+  "message": "hello, test",
+  "auto_send": true,
+  "session_name": "anon",
+  "proxy_ip": "",
+  "proxy_port": ,
+  "mysql_ip": "127.0.0.1",
+  "mysql_port": 3306,
+  "mysql_user": "root",
+  "mysql_pass": "123456",
+  "mysql_database": "tg_message"
+}
