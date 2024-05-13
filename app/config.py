@@ -29,10 +29,6 @@ pool = PooledDB(
     database=data["mysql_database"]
 )
 
-
-def get_group_ids():
-  return data['group_ids']
-
 def get_client():
   return TelegramClient(data['session_name'], data['api_id'],
                         data['api_hash'], timeout=60, proxy=(
