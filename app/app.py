@@ -24,7 +24,7 @@ def query_data():
         return {"data": {}, "success": False}
 
 
-@app.route('/api/resend', methods=['GET'])
+# @app.route('/api/resend', methods=['GET'])
 def resend_message():
     try:
         loop = asyncio.new_event_loop()
