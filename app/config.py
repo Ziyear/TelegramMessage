@@ -6,6 +6,8 @@ import os
 import pymysql
 from dbutils.pooled_db import PooledDB
 from telethon import TelegramClient
+from telethon.errors.rpcerrorlist import AuthKeyError
+from telethon.sync import TelegramClient as SyncTelegramClient
 
 # 检查是否存在 config.json
 if os.path.exists('config.json'):
@@ -29,10 +31,17 @@ pool = PooledDB(
     database=data["mysql_database"]
 )
 
+
 def get_client():
-  return TelegramClient(data['session_name'], data['api_id'],
-                        data['api_hash'], timeout=60, proxy=(
-      'socks5', data['proxy_ip'], data['proxy_port']))
+  try:
+    return TelegramClient(data['session_name'], data['api_id'],
+                          data['api_hash'], timeout=60, proxy=(
+        'socks5', data['proxy_ip'], data['proxy_port']))
+  except AuthKeyError:
+    return SyncTelegramClient(data['session_name'],
+                              data['api_id'], data['api_hash'],
+                              timeout=60, proxy=(
+        'socks5', data['proxy_ip'], data['proxy_port']))
 
 
 logging.basicConfig(format='%(levelname)s: %(asctime)s: %(message)s',

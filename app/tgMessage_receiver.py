@@ -2,21 +2,13 @@ import json
 import pickle
 import time
 
-from telethon import TelegramClient, events
-from telethon.errors.rpcerrorlist import AuthKeyError
-from telethon.sync import TelegramClient as SyncTelegramClient
+from telethon import events
 
 import config
 
-try:
-  client = TelegramClient(config.data['session_name'], config.data['api_id'],
-                          config.data['api_hash'], timeout=60)
-  client.start()
-except AuthKeyError:
-  client = SyncTelegramClient(config.data['session_name'],
-                              config.data['api_id'], config.data['api_hash'],
-                              timeout=60)
-  client.start()
+client = config.get_client()
+client.start()
+
 if client:
   config.logging.info("client start")
 with open("group_ids.json", 'r') as f:
@@ -66,5 +58,5 @@ async def handle_new_message(event):
 
 
 config.logging.info(
-  f"Listening for messages containing {config.data['keywords']} in chats {chat_names}...")
+    f"Listening for messages containing {config.data['keywords']} in chats {chat_names}...")
 client.run_until_disconnected()
